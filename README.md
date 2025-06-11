@@ -1,5 +1,3 @@
-[Gray Square Placeholder]
-
 <h1 align="center">Nativas - jogo da memória</h1>
 <p align="center">
     <em>Nativas - jogo da memória é um jogo de memória baseado na web, construído com Next.js e bibliotecas de animação.</em>
