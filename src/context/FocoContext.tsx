@@ -23,7 +23,7 @@ export function FocoProvider({ children }: { children: ReactNode }) {
     <FocoContext.Provider value={{ focar, setFocar }}>
       {children}
     </FocoContext.Provider>
-  );
+  );  
 }
 
 export function useFocoContext() {
