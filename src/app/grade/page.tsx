@@ -20,19 +20,26 @@ export default function Page() {
     }
   }
 
-  if (!grade || !colunas || !linhas || isNaN(colunas) || isNaN(linhas)) {
+  if (
+    !grade ||
+    !colunas ||
+    !linhas ||
+    isNaN(colunas) ||
+    isNaN(linhas) ||
+    (linhas * colunas) % 2 != 0
+  ) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <SplitText
-          text="Nenhuma grade"
+          text="Não dá pra fazer uma grade com isso..."
           className="text-4xl font-semibold"
-          delay={50}
+          delay={5}
           duration={2}
           ease="elastic.out(1, 0.3)"
           splitType="chars"
           from={{ opacity: 0, y: 40 }}
           to={{ opacity: 1, y: 0 }}
-          threshold={0.1}
+          threshold={0.3}
           rootMargin="-100px"
           textAlign="center"
         />
@@ -92,7 +99,7 @@ export default function Page() {
             key={index}
             className="aspect-square flex items-center justify-center"
           >
-            <Image src={item.src} alt={`Card ${index}`}/>
+            <Image src={item.src} alt={`Card ${index}`} draggable={false} />
           </div>
         ))}
       </section>
