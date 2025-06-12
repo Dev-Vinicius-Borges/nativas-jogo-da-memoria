@@ -57,3 +57,7 @@ ou
 ```
 yarn dev
 ```
+
+## Licença
+
+Este projeto é licenciado sob a [GNU Affero General Public License v3.0 (AGPL-3.0)](https://www.gnu.org/licenses/agpl-3.0.html). Para mais detalhes, consulte o arquivo [LICENSE](https://github.com/Dev-Vinicius-Borges/clinicare/blob/main/LICENSE) no repositório.
