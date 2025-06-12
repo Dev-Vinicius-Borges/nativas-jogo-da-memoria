@@ -24,33 +24,36 @@
 
 ### Instalação
 
-1. Clone o repositório do Nativas - jogo da memória:
-   ```sh
-   ❯ git clone https://github.com/Dev-Vinicius-Borges/nativas-jogo-da-memoria
+Clone o repositório do Nativas - jogo da memória:
+   
+```
+git clone https://github.com/Dev-Vinicius-Borges/nativas-jogo-da-memoria
+```
 
+Navegue até o diretório do projeto:
+```
+cd nativas-jogo-da-memoria
+```
 
-2. Navegue até o diretório do projeto:
-    ```sh
-    ❯ cd nativas-jogo-da-memoria
-
-3. Instale as dependências do projeto usando npm ou yarn:
-    ```sh
-    ❯ npm install
-
-ou
-
-    ```sh
-    ❯ yarn install
-
-
-4. Para rodar o Nativas - jogo da memória em modo de desenvolvimento:
-
-    ```sh
-    ❯ npm run dev
+Instale as dependências do projeto usando npm ou yarn:
+```
+npm install
+```
 
 ou
 
-    ```sh
-    ❯ yarn dev
+```
+yarn install
+```
 
-5. Abra http://localhost:3000 no seu navegador para jogar.
+Para rodar o Nativas - jogo da memória:
+
+```
+npm run dev
+```
+
+ou
+
+```
+yarn dev
+```
