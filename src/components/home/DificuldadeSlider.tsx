@@ -9,15 +9,15 @@ interface EstadosSlider {
 const estadosSlider: Record<number, EstadosSlider> = {
   1: {
     label: "Fácil",
-    descricao: <BotaoDificuldade label="Fácil" link="4x4" bg="bg-green-500"/>,
+    descricao: <BotaoDificuldade label="Fácil" bg="bg-green-500" />,
   },
   2: {
     label: "Normal",
-    descricao: <BotaoDificuldade label="Normal" link="6x5" bg="bg-yellow-500" />,
+    descricao: <BotaoDificuldade label="Normal" bg="bg-yellow-500" />,
   },
   3: {
     label: "Difícil",
-    descricao: <BotaoDificuldade label="Difícil" link="6x6" bg="bg-red-600" />,
+    descricao: <BotaoDificuldade label="Difícil" bg="bg-red-600" />,
   },
 };
 
