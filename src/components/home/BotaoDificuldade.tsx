@@ -1,32 +1,37 @@
 import { useModal } from "@/context/ModalContext";
-// import Link from "next/link";
+import { criarJogo } from "@/lib/StoreJogo";
+import { useState } from "react";
+import ModalJogo from "../modal/ModalJogo";
 
 interface BotaoDificuldadeProp {
   bg: string;
   label: string;
+  dificuldade: string;
 }
 
 export default function BotaoDificuldade({
   bg,
   label,
+  dificuldade,
 }: BotaoDificuldadeProp) {
-  // const { setFocar } = useFocoContext();
-  const { abrirModal, setAbrirModal } = useModal();
+  const { setAbrirModal, setConteudoModal } = useModal();
+  const [carregando, setCarregando] = useState<boolean>(false);
+
+  async function eventoClick() {
+    setCarregando(true);
+    const jogo = criarJogo(dificuldade);
+
+    setCarregando(false);
+    setConteudoModal(<ModalJogo {...jogo} />);
+    setAbrirModal(true);
+  }
 
   return (
-    // <Link
-    //   href={{ pathname: "/grade", query: { grid: link } }}
-    //   className={`${bg} p-[1rem_2rem] rounded-xl shadow-gray-500 shadow text-2xl text-[var(--background)]`}
-    //   onClick={() => setFocar(true)}
-    // >
-    //   {label}
-    // </Link>^
-
     <button
       className={`${bg} p-[1rem_2rem] rounded-xl shadow-gray-500 shadow text-2xl text-[var(--background)]`}
-      onClick={() => setAbrirModal(!abrirModal)}
+      onClick={eventoClick}
     >
-      {label}
+      {!carregando ? label : "Carregando..."}
     </button>
   );
 }
