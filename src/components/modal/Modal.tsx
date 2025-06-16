@@ -3,12 +3,10 @@ import { ReactNode, useEffect } from "react";
 import * as Ariakit from "@ariakit/react";
 
 interface ModalProps {
-  titulo: string;
-  texto?: string;
   conteudo: ReactNode;
 }
 
-export function Modal({ titulo, texto, conteudo }: ModalProps): ReactNode {
+export function Modal({ conteudo }: ModalProps): ReactNode {
   const dialog = Ariakit.useDialogStore();
 
   useEffect(() => dialog.show(), [dialog]);
@@ -23,7 +21,7 @@ export function Modal({ titulo, texto, conteudo }: ModalProps): ReactNode {
           onClose={() => {
             dialog.hide();
           }}
-          className="fixed inset-0 z-50 m-auto flex h-fit max-h-[calc(100dvh-1.5rem)] flex-col gap-4 overflow-auto rounded-xl bg-white p-4 text-black shadow-2xl shadow-black items-start"
+          className="fixed inset-0 z-50 m-auto flex h-fit max-h-[calc(100dvh-1.5rem)] overflow-auto rounded-xl bg-white p-4 text-black shadow-black items-start flex-col shadow-xl sm:max-h-[80vh] sm:w-[420px] sm:rounded-2xl sm:p-6"
           backdrop={
             <motion.div
               className="bg-black/[0.1] backdrop-blur-sm"
@@ -40,11 +38,7 @@ export function Modal({ titulo, texto, conteudo }: ModalProps): ReactNode {
             />
           }
         >
-          <Ariakit.DialogHeading className="m-0 text-xl font-bold w-full">
-            <h1 className="text-center">{titulo}</h1>
-            <p className="text-center">Lorem ipsum dolor sit amet.</p>
-          </Ariakit.DialogHeading>
-          <div>{conteudo}</div>
+          <span>{conteudo}</span>
         </Ariakit.Dialog>
       )}
     </AnimatePresence>
