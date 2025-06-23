@@ -1,8 +1,8 @@
-import imagem_48 from "./Frame_48.svg";
-import imagem_49 from "./Frame_49.svg";
-import imagem_50 from "./Frame_50.svg";
-import imagem_51 from "./Frame_51.svg";
-import imagem_52 from "./Frame_52.svg";
+import jatoba from "./jatoba.webp";
+import cipo_de_sao_joao from "./cipo_de_sao_joao.webp";
+import inga from "./inga.webp";
+import lantana_camara from "./lantana_camara.webp";
+import primavera from "./primavera.webp";
 import imagem_53 from "./Frame_53.svg";
 import imagem_54 from "./Frame_54.svg";
 import imagem_55 from "./Frame_55.svg";
@@ -36,12 +36,42 @@ import imagem_82 from "./Frame_82.svg";
 import imagem_83 from "./Frame_83.svg";
 
 const imagens = [
-  imagem_48, imagem_49, imagem_50, imagem_51, imagem_52, imagem_53,
-  imagem_54, imagem_55, imagem_56, imagem_57, imagem_58, imagem_59,
-  imagem_60, imagem_61, imagem_62, imagem_63, imagem_64, imagem_65,
-  imagem_66, imagem_67, imagem_68, imagem_69, imagem_70, imagem_71,
-  imagem_72, imagem_73, imagem_74, imagem_75, imagem_76, imagem_77,
-  imagem_78, imagem_79, imagem_80, imagem_81, imagem_82, imagem_83
+  { dadoImagem: jatoba, nome: "Jatobá" },
+  { dadoImagem: cipo_de_sao_joao, nome: "Cipo de São João" },
+  { dadoImagem: inga, nome: "Inga" },
+  { dadoImagem: lantana_camara, nome: "Lantana Camara" },
+  { dadoImagem: primavera, nome: "Frame_52" },
+  { dadoImagem: imagem_53, nome: "Frame_53" },
+  { dadoImagem: imagem_54, nome: "Frame_54" },
+  { dadoImagem: imagem_55, nome: "Frame_55" },
+  { dadoImagem: imagem_56, nome: "Frame_56" },
+  { dadoImagem: imagem_57, nome: "Frame_57" },
+  { dadoImagem: imagem_58, nome: "Frame_58" },
+  { dadoImagem: imagem_59, nome: "Frame_59" },
+  { dadoImagem: imagem_60, nome: "Frame_60" },
+  { dadoImagem: imagem_61, nome: "Frame_61" },
+  { dadoImagem: imagem_62, nome: "Frame_62" },
+  { dadoImagem: imagem_63, nome: "Frame_63" },
+  { dadoImagem: imagem_64, nome: "Frame_64" },
+  { dadoImagem: imagem_65, nome: "Frame_65" },
+  { dadoImagem: imagem_66, nome: "Frame_66" },
+  { dadoImagem: imagem_67, nome: "Frame_67" },
+  { dadoImagem: imagem_68, nome: "Frame_68" },
+  { dadoImagem: imagem_69, nome: "Frame_69" },
+  { dadoImagem: imagem_70, nome: "Frame_70" },
+  { dadoImagem: imagem_71, nome: "Frame_71" },
+  { dadoImagem: imagem_72, nome: "Frame_72" },
+  { dadoImagem: imagem_73, nome: "Frame_73" },
+  { dadoImagem: imagem_74, nome: "Frame_74" },
+  { dadoImagem: imagem_75, nome: "Frame_75" },
+  { dadoImagem: imagem_76, nome: "Frame_76" },
+  { dadoImagem: imagem_77, nome: "Frame_77" },
+  { dadoImagem: imagem_78, nome: "Frame_78" },
+  { dadoImagem: imagem_79, nome: "Frame_79" },
+  { dadoImagem: imagem_80, nome: "Frame_80" },
+  { dadoImagem: imagem_81, nome: "Frame_81" },
+  { dadoImagem: imagem_82, nome: "Frame_82" },
+  { dadoImagem: imagem_83, nome: "Frame_83" },
 ];
 
 export default imagens;
