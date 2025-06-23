@@ -29,10 +29,10 @@ export default function GrupoFolhas({ inverter, focar }: GrupoFolhasProp) {
       <div
         className={`absolute ${
           inverter
-            ? "top-[300px] left-[-150px]"
+            ? "top-[300px] left-[-150px] 3xl:top-[500px] max-lg:top-[500px]"
             : "left-[-150px] bottom-[-300px]"
         } z-[1] transform origin-center ${
-          focar ? "scale-[0.7] translate-x-[-10%]" : ""
+          focar ? "scale-[0.7] translate-x-[-10%] 3xl:translate-x-[-20%] max-lg:translate-x-[-20%]" : ""
         }`}
       >
         <Image
@@ -46,7 +46,7 @@ export default function GrupoFolhas({ inverter, focar }: GrupoFolhasProp) {
       <div
         className={`absolute ${
           inverter
-            ? "left-[-200px] top-[300px]"
+            ? "left-[-200px] top-[300px] 3xl:top-[550px] max-lg:top-[550px]"
             : "left-[-200px] bottom-[-150px]"
         }  transform origin-center ${
           focar ? "scale-[0.7] translate-x-[-10%] translate-y-[10%]" : ""
@@ -61,7 +61,7 @@ export default function GrupoFolhas({ inverter, focar }: GrupoFolhasProp) {
       </div>
       <div
         className={`absolute ${
-          inverter ? "left-[-250px] top-[200px]" : "left-[-250px] bottom-0"
+          inverter ? "left-[-250px] top-[200px] 3xl:top-[400px] max-lg:top-[400px]" : "left-[-250px] bottom-0"
         } transform origin-center ${
           focar ? "scale-[0.7] translate-x-[-5%] translate-y-[20%]" : ""
         }`}
@@ -75,7 +75,7 @@ export default function GrupoFolhas({ inverter, focar }: GrupoFolhasProp) {
       </div>
       <div
         className={`absolute ${
-          inverter ? "left-[5px] top-[350px]" : "left-[10px] bottom-[-200px]"
+          inverter ? "left-[5px] top-[350px] 3xl:top-[600px] max-lg:top-[600px]" : "left-[10px] bottom-[-200px]"
         } ${focar ? "scale-[0.7] translate-x-[-5%] translate-y-[20%]" : ""}`}
       >
         <Image
@@ -87,7 +87,7 @@ export default function GrupoFolhas({ inverter, focar }: GrupoFolhasProp) {
       </div>
       <div
         className={`absolute ${
-          inverter ? "top-[500px] left-[100px]" : "bottom-[-270px] left-[100px]"
+          inverter ? "top-[500px] left-[100px] 3xl:top-[700px] max-lg:top-[700px]" : "bottom-[-270px] left-[100px]"
         } ${focar ? "scale-[0.7] translate-x-[-40%] translate-y-[-20%]" : ""}`}
       >
         <Image
