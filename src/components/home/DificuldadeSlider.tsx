@@ -1,4 +1,11 @@
-import { ChangeEvent, ReactNode, useState, useRef, useCallback } from "react";
+import {
+  ChangeEvent,
+  ReactNode,
+  useState,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 import BotaoDificuldade from "./BotaoDificuldade";
 
 interface EstadosSlider {
@@ -9,20 +16,33 @@ interface EstadosSlider {
 const estadosSlider: Record<number, EstadosSlider> = {
   1: {
     label: "Fácil",
-    descricao: <BotaoDificuldade label="Fácil" bg="bg-green-500" />,
+    descricao: (
+      <BotaoDificuldade label="Fácil" bg="bg-green-500" dificuldade="fácil" />
+    ),
   },
   2: {
     label: "Normal",
-    descricao: <BotaoDificuldade label="Normal" bg="bg-yellow-500" />,
+    descricao: (
+      <BotaoDificuldade
+        label="Normal"
+        bg="bg-yellow-500"
+        dificuldade="normal"
+      />
+    ),
   },
   3: {
     label: "Difícil",
-    descricao: <BotaoDificuldade label="Difícil" bg="bg-red-600" />,
+    descricao: (
+      <BotaoDificuldade label="Difícil" bg="bg-red-600" dificuldade="difícil" />
+    ),
   },
 };
 
 export default function DificuldadeSlider() {
-  const defaultPositions: Record<number, number> = { 1: 0, 2: 50, 3: 100 };
+  const defaultPositions = useMemo<Record<number, number>>(
+    () => ({ 1: 0, 2: 50, 3: 100 }),
+    []
+  );
 
   const [value, setValue] = useState<number>(2);
   const [position, setPosition] = useState<number>(defaultPositions[value]);
@@ -52,6 +72,7 @@ export default function DificuldadeSlider() {
   }, []);
 
   const handleDragEnd = useCallback(() => {
+    
     let newValue = 2;
     if (position < 25) {
       newValue = 1;
@@ -65,7 +86,7 @@ export default function DificuldadeSlider() {
     setDragging(false);
     window.removeEventListener("mousemove", handleDrag);
     window.removeEventListener("mouseup", handleDragEnd);
-  }, [position, handleDrag]);
+  }, [position, defaultPositions, handleDrag]);
 
   const handleDragStart = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
@@ -77,7 +98,7 @@ export default function DificuldadeSlider() {
   const currentState: EstadosSlider = estadosSlider[value];
 
   return (
-    <div ref={sliderRef} className="relative my-8 w-full">
+    <div ref={sliderRef} className="relative my-8 max-lg:w-[50%] w-full">
       <input
         type="range"
         id="dificuldade"
