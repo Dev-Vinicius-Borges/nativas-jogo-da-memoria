@@ -4,6 +4,7 @@ import "./globals.css";
 import { FocoProvider } from "@/context/FocoContext";
 import FundoFolhas from "@/components/fundo-folhas/fundo-folhas";
 import { ModalProvider } from "@/context/ModalContext";
+import { SocketProvider } from "@/context/SocketContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,24 +21,25 @@ export const metadata: Metadata = {
   description: "Jogo da memória feito para o Nativas!",
 };
 
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <ModalProvider>
-      <FocoProvider>
-        <html lang="pt-br">
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            {children}
-            <FundoFolhas />
-          </body>
-        </html>
-      </FocoProvider>
-    </ModalProvider>
+    <SocketProvider>
+      <ModalProvider>
+        <FocoProvider>
+          <html lang="pt-br">
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              {children}
+              <FundoFolhas />
+            </body>
+          </html>
+        </FocoProvider>
+      </ModalProvider>
+    </SocketProvider>
   );
 }
