@@ -1,12 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode, useEffect } from "react";
 import * as Ariakit from "@ariakit/react";
+import { useModal } from "@/context/ModalContext";
 
 interface ModalProps {
   conteudo: ReactNode;
 }
 
 export function Modal({ conteudo }: ModalProps): ReactNode {
+  const {setAbrirModal, setConteudoModal} = useModal();
   const dialog = Ariakit.useDialogStore();
 
   useEffect(() => dialog.show(), [dialog]);
@@ -19,6 +21,8 @@ export function Modal({ conteudo }: ModalProps): ReactNode {
           store={dialog}
           alwaysVisible
           onClose={() => {
+            setAbrirModal(false);
+            setConteudoModal(null);
             dialog.hide();
           }}
           className="fixed inset-0 z-50 m-auto flex h-fit max-h-[calc(100dvh-1.5rem)] overflow-auto rounded-xl bg-white p-4 text-black shadow-black items-start flex-col shadow-xl sm:max-h-[80vh] sm:w-[420px] sm:rounded-2xl sm:p-6"
