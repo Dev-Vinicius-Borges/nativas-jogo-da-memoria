@@ -1,5 +1,6 @@
 "use client";
 
+import IJogador from "@/utils/interfaces/IJogador";
 import IPartida from "@/utils/interfaces/IPartida";
 import {
   createContext,
@@ -16,12 +17,16 @@ interface SocketContextType {
   conectado: boolean;
   cartasViradas: number[];
   cartasEncontradas: number[];
-  criarPartida: (colunas: number, linhas: number, cartas: any[]) => void;
+  criarPartida: (colunas: number, linhas: number, cartas: unknown[]) => void;
   entrarPartida: (partidaId: string, nomeJogador: string) => void;
-  entrarComoEspectador: (partidaId: string) => void;
   virarCarta: (indiceCarta: number) => void;
   buscarPartida: (partidaId: string) => void;
+  entrarComoEspectador: (partidaId: string, nomeEspectador: string) => void;
   erro: string | null;
+  fimPartida: {
+    status: boolean;
+    ganhador: string | null;
+  };
 }
 
 interface SocketProviderProps {
@@ -37,8 +42,12 @@ export function SocketProvider({ children }: SocketProviderProps) {
   const [erro, setErro] = useState<string | null>(null);
   const [cartasViradas, setCartasViradas] = useState<number[]>([]);
   const [cartasEncontradas, setCartasEncontradas] = useState<number[]>([]);
+  const [fimPartida, setFimPartida] = useState<{
+    status: boolean;
+    ganhador: string | null;
+  }>({ status: false, ganhador: null });
 
-  const criarPartida = (colunas: number, linhas: number, cartas: any[]) => {
+  const criarPartida = (colunas: number, linhas: number, cartas: unknown[]) => {
     if (socket) {
       console.log(`Cartas: ${cartas}`);
       socket.emit("criarPartida", { colunas, linhas, cartas });
@@ -51,9 +60,9 @@ export function SocketProvider({ children }: SocketProviderProps) {
     }
   };
 
-  const entrarComoEspectador = (partidaId: string) => {
-    if (socket) {
-      socket.emit("entrarComoEspectador", { partidaId });
+  const entrarComoEspectador = (partidaId: string, nomeEspectador: string) => {
+    if (socket && partida) {
+      socket.emit("entrarComoEspectador", { partidaId, nomeEspectador });
     }
   };
 
@@ -129,8 +138,19 @@ export function SocketProvider({ children }: SocketProviderProps) {
       );
     });
 
+    socketInstance.on("fimDeJogo", (jogador: IJogador) => {
+      setFimPartida({
+        status: true,
+        ganhador: jogador.nome,
+      });
+    });
+
     socketInstance.on("erro", (dados: { mensagem: string }) => {
       setErro(dados.mensagem);
+      setTimeout(() => {
+        setErro(null);
+        
+      }, 3000);
     });
 
     setSocket(socketInstance);
@@ -154,6 +174,7 @@ export function SocketProvider({ children }: SocketProviderProps) {
         buscarPartida,
         virarCarta,
         erro,
+        fimPartida,
       }}
     >
       {children}
