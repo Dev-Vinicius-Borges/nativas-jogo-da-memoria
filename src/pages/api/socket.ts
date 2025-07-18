@@ -80,16 +80,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         }
       });
 
-      socket.on("entrarComoEspectador", ({ partidaId }) => {
+      socket.on("entrarComoEspectador", ({ partidaId, nomeEspectador }) => {
         const partida = partidas[partidaId];
         if (!partida) {
-          socket.emit("erro", { mensagem: "Partida não encontrada" });
+          socket.emit("erro", { mensagem: "Partida não encontrada." });
           return;
         }
-        partida.espectadores.push(socket.id);
-        socket.join(partidaId);
 
-        io.to(partidaId).emit("partidaAtualizada", partida);
+        const buscarNome = partida.espectadores.find((espectador: { nome: string }) => espectador.nome === nomeEspectador);
+        if (buscarNome) {
+          io.to(partidaId).emit("erro", { mensagem: "Escolha outro nome de usuário." });
+        }
+
+        partida.espectadores.push();
       });
 
       socket.on("virarCarta", ({ partidaId, indiceCarta }) => {
@@ -102,7 +105,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           partida.cartasViradas.includes(indiceCarta) ||
           partida.cartasEncontradas.includes(indiceCarta)
         ) {
-          socket.emit("erro", { mensagem: "Carta já virada" });
+          io.to(partidaId).emit("erro", { mensagem: "Carta já virada" });
           return;
         }
 
@@ -127,6 +130,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
                 jogadorAtual.pontuacao += 1;
               }
               partida.cartasViradas = [];
+
+              if (partida.cartasEncontradas.length === partida.configuracao.cartas.length) {
+                if (partida.jogadores[0].pontuacao > partida.jogadores[1].pontuacao) {
+                  io.to(partidaId).emit("fimDeJogo", partida.jogadores[0]);
+                } else {
+                  io.to(partidaId).emit("fimDeJogo", partida.jogadores[1]);
+                }
+              }
             } else {
               io.to(partidaId).emit("cartasVirarDeVolta", partida.cartasViradas);
               partida.cartasViradas = [];
