@@ -27,7 +27,6 @@ body {
   animation: vento 5s ease-in-out infinite;
 }
 
-
-@theme{
+@theme {
   --breakpoint-3xl: 120rem;
 }

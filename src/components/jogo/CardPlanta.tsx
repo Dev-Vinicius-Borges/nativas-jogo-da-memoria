@@ -39,7 +39,7 @@ export default function CardPlanta({
     >
       <div
         className={cn(
-          "relative aspect-square flex items-center justify-center transition duration-500 [transform-style:preserve-3d] rounded-lg select-none [transform:rotateY(180deg)]",
+          "relative aspect-square flex items-center justify-center transition duration-500 [transform-style:preserve-3d] rounded-lg select-none",
           virada && "[transform:rotateY(180deg)]",
           encontrada && "[transform:rotateY(180deg)]"
         )}

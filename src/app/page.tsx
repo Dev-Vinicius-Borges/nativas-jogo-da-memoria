@@ -1,9 +1,11 @@
 "use client";
 
 import DificuldadeSlider from "@/components/home/DificuldadeSlider";
+import EfeitoFolhas from "@/components/jogo/efeito_folhas";
 import { useFocoContext } from "@/context/FocoContext";
 import { useSocket } from "@/context/SocketContext";
 import BlurText from "@/lib/BlurText";
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function Home() {

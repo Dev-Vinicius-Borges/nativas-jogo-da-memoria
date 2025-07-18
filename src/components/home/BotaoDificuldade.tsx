@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import imagens from "@/assets/imagens/cards/cards";
+import imagens from "@/assets/imagens/cards/_cards";
 import { useSocket } from "@/context/SocketContext";
 import { useModal } from "@/context/ModalContext";
 import GerarQrCode from "../partida/GerarQrCode";

@@ -48,19 +48,6 @@ export default function FormEntrada({ onEntrar }: FormEntradaProps) {
           {carregando ? 'Entrando...' : 'Entrar na Partida'}
         </button>
       </form>
-
-      <div className="mt-6 text-center">
-        <button
-          onClick={() => {
-            const urlParams = new URLSearchParams(window.location.search);
-            urlParams.set('espectador', 'true');
-            window.location.search = urlParams.toString();
-          }}
-          className="text-md text-[#F9F5EA] underline"
-        >
-          Entrar como espectador
-        </button>
-      </div>
     </div>
   );
 }
