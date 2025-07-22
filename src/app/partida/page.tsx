@@ -188,7 +188,7 @@ export default function PartidaPage() {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full text-center flex flex-col items-center gap-4 px-8 py-2">
             <div className="p-10 max-w-[300px] aspect-square bg-[#D4A95B] shadow-xl rounded-full flex justify-center items-center animate-bounce">
               <BlurText
-                text="Jogador"
+                text={fimPartida.ganhador!}
                 delay={100}
                 animateBy="letters"
                 direction="bottom"
