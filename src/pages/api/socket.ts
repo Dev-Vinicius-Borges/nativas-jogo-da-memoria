@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TPartida } from '@/utils/types/TPartida';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Server } from 'socket.io';
@@ -164,7 +165,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             }
             break;
           }
-          const espectadorIndex = partida.espectadores.findIndex((e: string) => e === socket.id);
+            const espectadorIndex = partida.espectadores.findIndex((e: { nome: string }) => e.nome === socket.id);
           if (espectadorIndex !== -1) {
             partida.espectadores.splice(espectadorIndex, 1);
             io.to(partidaId).emit("partidaAtualizada", partida);

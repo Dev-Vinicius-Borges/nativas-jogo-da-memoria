@@ -8,7 +8,7 @@ export default interface IPartida {
     configuracao: {
         colunas: number;
         linhas: number;
-        cartas: any[];
+        cartas: unknown[];
     };
     status: "aguardando" | "jogando" | "finalizada";
     espectadores: string[];

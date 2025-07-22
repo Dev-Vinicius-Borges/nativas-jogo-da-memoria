@@ -9,7 +9,7 @@ export default function EfeitoFolhas() {
 
     const viewport = containerRef.current;
     const world = document.createElement("div");
-    const leaves: any[] = [];
+    const leaves: Leaf[] = [];
 
     const options = {
       numLeaves: 26,
@@ -18,6 +18,7 @@ export default function EfeitoFolhas() {
         maxSpeed: 12,
         duration: 300,
         start: 0,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         speed: (_t: number, _y: number) => 0,
       },
     };
@@ -26,7 +27,24 @@ export default function EfeitoFolhas() {
     let height = viewport.offsetHeight;
     let timer = 0;
 
-    const resetLeaf = (leaf: any) => {
+    interface Leaf {
+      el: HTMLDivElement;
+      x: number;
+      y: number;
+      z: number;
+      rotation: {
+        axis: "X" | "Y" | "Z";
+        value: number;
+        speed: number;
+        x: number;
+      };
+      xSpeedVariation: number;
+      ySpeed: number;
+      path: { type: number; start: number };
+      image: number;
+    }
+
+    const resetLeaf = (leaf: Leaf) => {
       leaf.x = width * 2 - Math.random() * width * 1.75;
       leaf.y = -10;
       leaf.z = Math.random() * 200;
@@ -59,7 +77,7 @@ export default function EfeitoFolhas() {
       return leaf;
     };
 
-    const updateLeaf = (leaf: any) => {
+    const updateLeaf = (leaf: Leaf) => {
       const leafWindSpeed = options.wind.speed(
         timer - options.wind.start,
         leaf.y
@@ -81,9 +99,6 @@ export default function EfeitoFolhas() {
 
       const el = leaf.el;
       el.style.transform = transform;
-      el.style.webkitTransform = transform;
-      el.style.MozTransform = transform;
-      el.style.oTransform = transform;
 
       if (leaf.x < -10 || leaf.y > height + 10) {
         resetLeaf(leaf);
@@ -112,13 +127,13 @@ export default function EfeitoFolhas() {
 
     const init = () => {
       for (let i = 0; i < options.numLeaves; i++) {
-        const leaf = {
+        const leaf: Leaf = {
           el: document.createElement("div"),
           x: 0,
           y: 0,
           z: 0,
           rotation: {
-            axis: "X",
+            axis: "X" as "X" | "Y" | "Z",
             value: 0,
             speed: 0,
             x: 0,
@@ -159,7 +174,7 @@ export default function EfeitoFolhas() {
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", handleResize);
-      viewport.innerHTML = ""; // Limpa os elementos inseridos
+      viewport.innerHTML = "";
     };
   }, []);
 
