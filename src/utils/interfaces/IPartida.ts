@@ -1,4 +1,7 @@
+import ICarta from "./ICarta";
 import IJogador from "./IJogador";
+
+
 
 export default interface IPartida {
     id: string;
@@ -8,7 +11,7 @@ export default interface IPartida {
     configuracao: {
         colunas: number;
         linhas: number;
-        cartas: unknown[];
+        cartas: ICarta[];
     };
     status: "aguardando" | "jogando" | "finalizada";
     espectadores: string[];

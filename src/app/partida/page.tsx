@@ -92,6 +92,7 @@ export default function PartidaPage() {
       if (larguraTela <= 1024) {
         colunas = Math.min(colunasOriginais, 5);
       }
+      
 
       setGrade(
         <section
