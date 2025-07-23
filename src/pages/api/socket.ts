@@ -132,7 +132,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
               }
               partida.cartasViradas = [];
 
-              if (partida.cartasEncontradas.length > partida.configuracao.cartas.length) {
+              if (partida.cartasEncontradas.length === partida.configuracao.cartas.length) {
                 if (partida.jogadores[0].pontuacao > partida.jogadores[1].pontuacao) {
                   io.to(partidaId).emit("fimDeJogo", partida.jogadores[0]);
                 } else if (partida.jogadores[0].pontuacao < partida.jogadores[1].pontuacao) {
@@ -179,6 +179,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         }
       });
     });
+
     if (res.socket) {
       (res.socket as any).server.io = io;
     }
