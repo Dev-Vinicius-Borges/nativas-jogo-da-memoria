@@ -138,10 +138,10 @@ export function SocketProvider({ children }: SocketProviderProps) {
       );
     });
 
-    socketInstance.on("fimDeJogo", (jogador: IJogador) => {
+    socketInstance.on("fimDeJogo", (ganhador: IJogador | string) => {
       setFimPartida({
         status: true,
-        ganhador: jogador.nome,
+        ganhador: typeof ganhador == "string" ? ganhador : ganhador.nome,
       });
     });
 
@@ -149,7 +149,6 @@ export function SocketProvider({ children }: SocketProviderProps) {
       setErro(dados.mensagem);
       setTimeout(() => {
         setErro(null);
-        
       }, 3000);
     });
 
