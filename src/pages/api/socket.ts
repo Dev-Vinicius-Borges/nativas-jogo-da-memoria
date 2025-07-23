@@ -154,7 +154,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         }
       });
 
-
       socket.on("disconnect", () => {
         for (const partidaId in partidas) {
           const partida = partidas[partidaId];
