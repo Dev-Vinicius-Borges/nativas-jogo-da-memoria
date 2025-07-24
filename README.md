@@ -1,6 +1,6 @@
 <h1 align="center">Nativas - jogo da memória</h1>
 <p align="center">
-    <em>Nativas - jogo da memória é um jogo de memória baseado na web, construído com Next.js e bibliotecas de animação.</em>
+    <em>Nativas - é um jogo de memória baseado na web, construído com Next.js e bibliotecas de animação.</em>
 </p>
 <p align="center">
     <img src="https://img.shields.io/github/license/Dev-Vinicius-Borges/nativas-jogo-da-memoria?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="licença">
