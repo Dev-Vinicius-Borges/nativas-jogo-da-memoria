@@ -158,7 +158,7 @@ export default function PartidaClient() {
     );
   }
 
-  if (partida.status === "aguardando") {
+  if (partida.status.execucao == "aguardando") {
     return (
       <div className="text-center max-w-md w-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <SplitText

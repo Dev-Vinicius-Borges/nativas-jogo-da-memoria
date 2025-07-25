@@ -28,7 +28,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           cartasEncontradas: [],
           turnoAtual: 0,
           configuracao: { colunas, linhas, cartas },
-          status: true,
+          status: { execucao: "aguardando", bloqueado: false },
           espectadores: []
         };
 
@@ -76,7 +76,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         io.to(partidaId).emit("partidaAtualizada", partida);
 
         if (partida.jogadores.length === 2) {
-          partida.status = true;
+          partida.status.execucao = "esperando jogadores";
           io.to(partidaId).emit("partidaAtualizada", partida);
         }
       });
@@ -110,13 +110,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           return;
         }
 
-        if (!partida.status) return;
+        if (partida.status.bloqueado) return;
 
         partida.cartasViradas.push(indiceCarta);
         io.to(partidaId).emit("cartaVirada", { indiceCarta, jogadorId: socket.id });
 
         if (partida.cartasViradas.length === 2) {
-          partida.status = false;
+          partida.status.bloqueado = true;
           setTimeout(() => {
             const [carta1, carta2] = partida.cartasViradas;
             const cartaObj1 = partida.configuracao.cartas[carta1];
@@ -136,10 +136,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
               partida.cartasViradas = [];
 
               if (partida.cartasEncontradas.length === partida.configuracao.cartas.length) {
-                if (partida.jogadores[0].pontuacao > partida.jogadores[1].pontuacao) {
-                  io.to(partidaId).emit("fimDeJogo", partida.jogadores[0]);
-                } else if (partida.jogadores[0].pontuacao < partida.jogadores[1].pontuacao) {
-                  io.to(partidaId).emit("fimDeJogo", partida.jogadores[1]);
+                const [jogador1, jogador2] = partida.jogadores;
+                if (jogador1.pontuacao > jogador2.pontuacao) {
+                  io.to(partidaId).emit("fimDeJogo", jogador1);
+                } else if (jogador1.pontuacao < jogador2.pontuacao) {
+                  io.to(partidaId).emit("fimDeJogo", jogador2);
                 } else {
                   io.to(partidaId).emit("fimDeJogo", "empate");
                 }
@@ -149,7 +150,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
               partida.cartasViradas = [];
               partida.turnoAtual = (partida.turnoAtual + 1) % partida.jogadores.length;
             }
-            partida.status = true;
+            partida.status.bloqueado = false;
 
             io.to(partidaId).emit("partidaAtualizada", partida);
           }, 1000);
@@ -170,7 +171,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             }
             break;
           }
-            const espectadorIndex = partida.espectadores.findIndex((e: { nome: string }) => e.nome === socket.id);
+          const espectadorIndex = partida.espectadores.findIndex((e: { nome: string }) => e.nome === socket.id);
           if (espectadorIndex !== -1) {
             partida.espectadores.splice(espectadorIndex, 1);
             io.to(partidaId).emit("partidaAtualizada", partida);

@@ -13,6 +13,6 @@ export default interface IPartida {
         linhas: number;
         cartas: ICarta[];
     };
-    status: boolean;
+    status: { execucao: "aguardando" | "esperando jogadores", bloqueado: boolean };
     espectadores: string[];
 }

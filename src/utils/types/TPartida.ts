@@ -9,8 +9,8 @@ export type TPartida = {
   configuracao: {
     colunas: number;
     linhas: number;
-    cartas: { id: string; nome?: string; imagemUrl?: string; [key: string]: string | number | undefined }[];
+    cartas: { id: string; nome?: string; imagemUrl?: string;[key: string]: string | number | undefined }[];
   };
-  status: boolean;
+  status: { execucao: "aguardando" | "fim" | "esperando jogadores", bloqueado: boolean };
   espectadores: { nome: string; }[];
 };
