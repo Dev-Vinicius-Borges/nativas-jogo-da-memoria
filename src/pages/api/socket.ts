@@ -28,7 +28,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           cartasEncontradas: [],
           turnoAtual: 0,
           configuracao: { colunas, linhas, cartas },
-          status: "aguardando",
+          status: true,
           espectadores: []
         };
 
@@ -110,10 +110,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           return;
         }
 
+        if (!partida.status) return;
+
         partida.cartasViradas.push(indiceCarta);
         io.to(partidaId).emit("cartaVirada", { indiceCarta, jogadorId: socket.id });
 
         if (partida.cartasViradas.length === 2) {
+          partida.status = false;
           setTimeout(() => {
             const [carta1, carta2] = partida.cartasViradas;
             const cartaObj1 = partida.configuracao.cartas[carta1];
@@ -146,6 +149,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
               partida.cartasViradas = [];
               partida.turnoAtual = (partida.turnoAtual + 1) % partida.jogadores.length;
             }
+            partida.status = true;
 
             io.to(partidaId).emit("partidaAtualizada", partida);
           }, 1000);
