@@ -76,7 +76,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         io.to(partidaId).emit("partidaAtualizada", partida);
 
         if (partida.jogadores.length === 2) {
-          partida.status = "jogando";
+          partida.status = true;
           io.to(partidaId).emit("partidaAtualizada", partida);
         }
       });

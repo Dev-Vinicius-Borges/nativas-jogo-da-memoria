@@ -11,6 +11,6 @@ export type TPartida = {
     linhas: number;
     cartas: { id: string; nome?: string; imagemUrl?: string; [key: string]: string | number | undefined }[];
   };
-  status: string;
+  status: boolean;
   espectadores: { nome: string; }[];
 };
