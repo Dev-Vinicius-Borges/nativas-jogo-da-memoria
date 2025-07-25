@@ -1,8 +1,5 @@
 import ICarta from "./ICarta";
 import IJogador from "./IJogador";
-
-
-
 export default interface IPartida {
     id: string;
     jogadores: IJogador[];
@@ -13,6 +10,6 @@ export default interface IPartida {
         linhas: number;
         cartas: ICarta[];
     };
-    status: { execucao: "aguardando" | "esperando jogadores", bloqueado: boolean };
+    status: { execucao: string, bloqueado: boolean };
     espectadores: string[];
 }
