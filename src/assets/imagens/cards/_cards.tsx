@@ -1,5 +1,5 @@
 import araucaria from "./araucaria.webp";
-import azulzinha from "./araucaria.webp";
+import azulzinha from "./azulzinha.webp";
 import caliandra_rosa from "./caliandra_rosa.webp";
 import cipo_de_sao_joao from "./cipo_de_sao_joao.webp";
 import gabiroba from "./gabiroba.webp";
