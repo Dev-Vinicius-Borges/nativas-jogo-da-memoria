@@ -31,7 +31,7 @@ export default function GrupoFolhas({ inverter, focar }: GrupoFolhasProp) {
           inverter
             ? "top-[300px] left-[-150px] 3xl:top-[500px] max-lg:top-[500px]"
             : "left-[-150px] bottom-[-300px]"
-        } z-[1] transform origin-center ${
+        } z-1 transform origin-center ${
           focar ? "scale-[0.7] translate-x-[-10%] 3xl:translate-x-[-20%] max-lg:translate-x-[-20%]" : ""
         }`}
       >
@@ -75,7 +75,7 @@ export default function GrupoFolhas({ inverter, focar }: GrupoFolhasProp) {
       </div>
       <div
         className={`absolute ${
-          inverter ? "left-[5px] top-[350px] 3xl:top-[600px] max-lg:top-[600px]" : "left-[10px] bottom-[-200px]"
+          inverter ? "left-[5px] top-[350px] 3xl:top-[600px] max-lg:top-[600px]" : "left-2.5 bottom-[-200px]"
         } ${focar ? "scale-[0.7] translate-x-[-5%] translate-y-[20%]" : ""}`}
       >
         <Image

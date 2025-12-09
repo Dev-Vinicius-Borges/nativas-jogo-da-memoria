@@ -28,7 +28,7 @@ export function Modal({ conteudo }: ModalProps): ReactNode {
           className="fixed inset-0 z-50 m-auto flex h-fit max-h-[calc(100dvh-1.5rem)] overflow-auto rounded-xl bg-white p-4 text-black shadow-black items-start flex-col shadow-xl sm:max-h-[80vh] sm:w-[420px] sm:rounded-2xl sm:p-6"
           backdrop={
             <motion.div
-              className="bg-black/[0.1] backdrop-blur-sm"
+              className="bg-black/10 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

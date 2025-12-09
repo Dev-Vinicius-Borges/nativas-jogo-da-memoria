@@ -32,25 +32,25 @@ export default function CardPlanta({
       onClick={handleClick}
       disabled={desabilitada || encontrada}
       className={cn(
-        "outline-none [perspective:100rem] transition-opacity",
+        "outline-none perspective-[100rem] transition-opacity",
         (desabilitada || encontrada) && "cursor-not-allowed",
         encontrada && "opacity-75"
       )}
     >
       <div
         className={cn(
-          "relative aspect-square flex items-center justify-center transition duration-500 [transform-style:preserve-3d] rounded-lg select-none",
-          virada && "[transform:rotateY(180deg)]",
-          encontrada && "[transform:rotateY(180deg)]"
+          "relative aspect-square flex items-center justify-center transition duration-500 transform-3d rounded-lg select-none",
+          virada && "transform-[rotateY(180deg)]",
+          encontrada && "transform-[rotateY(180deg)]"
         )}
       >
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] flex items-center justify-center rounded-lg text-white text-3xl font-bold shadow-xl shadow-gray-600">
+        <div className="absolute inset-0 w-full h-full backface-hidden flex items-center justify-center rounded-lg text-white text-3xl font-bold shadow-xl shadow-gray-600">
           <div className="text-center">
             <Image src={logo} alt="Logo Nativas" className="rounded-lg"/>
           </div>
         </div>
 
-        <div className="size-full [backface-visibility:hidden] [transform:rotateY(180deg)] flex items-center justify-center rounded-lg bg-white shadow-xl shadow-gray-600">
+        <div className="size-full backface-hidden transform-[rotateY(180deg)] flex items-center justify-center rounded-lg bg-white shadow-xl shadow-gray-600">
           <div className="relative w-full h-full">
             <Image
               src={imagem}

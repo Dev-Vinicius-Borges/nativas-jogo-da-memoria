@@ -108,7 +108,7 @@ export default function DificuldadeSlider() {
         step={1}
         value={value}
         onChange={eventoHandler}
-        className="w-full appearance-none rounded-full h-[20px]"
+        className="w-full appearance-none rounded-full h-5"
         style={{
           backgroundImage:
             "linear-gradient(to right, #4bc67d 0%, #f1c40f 50%, #b94a48 100%)",
@@ -116,12 +116,12 @@ export default function DificuldadeSlider() {
       />
 
       <div
-        className="absolute top-[-10px] transform -translate-x-1/2"
+        className="absolute -top-2.5 transform -translate-x-1/2"
         style={{ left: `${position}%` }}
       >
         <span
           onMouseDown={handleDragStart}
-          className={`w-20 h-10 flex items-center justify-center border-4 ${thumbBorderColor} rounded-full bg-[var(--background)] text-sm ${
+          className={`w-20 h-10 flex items-center justify-center border-4 ${thumbBorderColor} rounded-full bg-(--background) text-sm ${
             !dragging ? "transition-all duration-500" : ""
           } cursor-grab select-none`}
         >
