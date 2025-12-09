@@ -1,6 +1,6 @@
 import { cn } from "@/lib/CardFlip";
 import Image, { StaticImageData } from "next/image";
-import logo from "@/assets/imagens/logo_nativas.png"
+import logo from "@/assets/imagens/logo_nativas.webp"
 
 interface CardPlantaProps {
   imagem: StaticImageData | string;
