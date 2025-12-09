@@ -184,7 +184,7 @@ export default function PartidaClient() {
       )}
 
       {fimPartida.status && (
-        <section className="absolute top-0 left-0 size-full bg-white/75 z-[100]">
+        <section className="absolute top-0 left-0 size-full bg-white/75 z-100">
           <EfeitoFolhas />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full text-center flex flex-col items-center gap-4 px-8 py-2">
             <div className="p-10 max-w-[300px] aspect-square bg-[#D4A95B] shadow-xl rounded-full flex justify-center items-center animate-bounce">
@@ -221,7 +221,7 @@ export default function PartidaClient() {
         />
       </div>
 
-      <div className="flex lg:justify-center lg:items-center min-h-screen">
+      <div className="flex lg:justify-center lg:items-center">
         {partida.jogadores[0] && (
           <div className="hidden lg:block lg:fixed lg:left-4 lg:top-1/2 lg:transform lg:-translate-y-1/2">
             <Placar
