@@ -99,15 +99,21 @@ export function SocketProvider({ children }: SocketProviderProps) {
       "partidaCriada",
       (dados: { partidaId: string; partida: IPartida }) => {
         setPartida(dados.partida);
+        setCartasViradas(dados.partida.cartasViradas ?? []);
+        setCartasEncontradas(dados.partida.cartasEncontradas ?? []);
       }
     );
 
     socketInstance.on("partidaAtualizada", (partidaAtualizada: IPartida) => {
       setPartida(partidaAtualizada);
+      setCartasViradas(partidaAtualizada.cartasViradas ?? []);
+      setCartasEncontradas(partidaAtualizada.cartasEncontradas ?? []);
     });
 
     socketInstance.on("partidaEncontrada", (partidaEncontrada: IPartida) => {
       setPartida(partidaEncontrada);
+      setCartasViradas(partidaEncontrada.cartasViradas ?? []);
+      setCartasEncontradas(partidaEncontrada.cartasEncontradas ?? []);
     });
 
     socketInstance.on(
