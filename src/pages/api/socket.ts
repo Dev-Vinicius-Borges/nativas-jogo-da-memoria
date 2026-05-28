@@ -53,14 +53,28 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           return;
         }
 
-        if (partida.jogadores.length >= 2) {
-          socket.emit("erro", { mensagem: "Partida cheia!" });
+        const jogadorPorSocket = partida.jogadores.find((jogador: { id: string }) => jogador.id === socket.id);
+        if (jogadorPorSocket) {
+          socket.emit("erro", { mensagem: "Você já está conectado nesta partida." });
           return;
         }
 
         const jogadorExistente = partida.jogadores.find((jogador: { nome: string }) => jogador.nome === nomeJogador);
         if (jogadorExistente) {
-          socket.emit("erro", { mensagem: "Nome de jogador já em uso nesta partida." });
+          if (jogadorExistente.conectado) {
+            socket.emit("erro", { mensagem: "Nome de jogador já em uso nesta partida." });
+            return;
+          }
+
+          jogadorExistente.id = socket.id;
+          jogadorExistente.conectado = true;
+          socket.join(partidaId);
+          io.to(partidaId).emit("partidaAtualizada", partida);
+          return;
+        }
+
+        if (partida.jogadores.length >= 2) {
+          socket.emit("erro", { mensagem: "Partida cheia!" });
           return;
         }
 
@@ -164,20 +178,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           const partida = partidas[partidaId];
           const jogadorIndex = partida.jogadores.findIndex((jogador: { id: string }) => jogador.id === socket.id);
           if (jogadorIndex !== -1) {
-            partida.jogadores.splice(jogadorIndex, 1);
+            partida.jogadores[jogadorIndex].conectado = false;
             io.to(partidaId).emit("partidaAtualizada", partida);
-            if (partida.jogadores.length === 0 && partida.espectadores.length === 0) {
-              delete partidas[partidaId];
-            }
             break;
           }
           const espectadorIndex = partida.espectadores.findIndex((e: { nome: string }) => e.nome === socket.id);
           if (espectadorIndex !== -1) {
             partida.espectadores.splice(espectadorIndex, 1);
             io.to(partidaId).emit("partidaAtualizada", partida);
-            if (partida.jogadores.length === 0 && partida.espectadores.length === 0) {
-              delete partidas[partidaId];
-            }
             break;
           }
         }
@@ -192,4 +200,3 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
   res.end();
 }
-

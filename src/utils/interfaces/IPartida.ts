@@ -4,6 +4,7 @@ export default interface IPartida {
     id: string;
     jogadores: IJogador[];
     cartasViradas: number[];
+    cartasEncontradas: number[];
     turnoAtual: number;
     configuracao: {
         colunas: number;
@@ -11,5 +12,5 @@ export default interface IPartida {
         cartas: ICarta[];
     };
     status: { execucao: string, bloqueado: boolean };
-    espectadores: string[];
+    espectadores: { nome: string }[];
 }
