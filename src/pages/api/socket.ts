@@ -29,7 +29,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           turnoAtual: 0,
           configuracao: { colunas, linhas, cartas },
           status: { execucao: "aguardando", bloqueado: false },
-          espectadores: []
+          espectadores: [],
+          reservas: []
         };
 
         partidas[partidaId] = partida;
@@ -42,6 +43,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         if (!partida) {
           socket.emit("erro", { mensagem: "Partida não encontrada" });
           return;
+        }
+        const jaJogador = partida.jogadores.some((jogador: { id: string }) => jogador.id === socket.id);
+        const jaReservado = partida.reservas.includes(socket.id);
+        if (!jaJogador && !jaReservado) {
+          const vagasOcupadas = partida.jogadores.length + partida.reservas.length;
+          if (vagasOcupadas < 2) {
+            partida.reservas.push(socket.id);
+          }
         }
         socket.emit("partidaEncontrada", partida);
       });
@@ -68,8 +77,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
           jogadorExistente.id = socket.id;
           jogadorExistente.conectado = true;
+          partida.reservas = partida.reservas.filter((id: string) => id !== socket.id);
           socket.join(partidaId);
           io.to(partidaId).emit("partidaAtualizada", partida);
+          return;
+        }
+
+        if (!partida.reservas.includes(socket.id)) {
+          socket.emit("erro", { mensagem: "Entrada não autorizada nesta partida." });
           return;
         }
 
@@ -85,6 +100,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           conectado: true,
         };
         partida.jogadores.push(jogador);
+        partida.reservas = partida.reservas.filter((id: string) => id !== socket.id);
         socket.join(partidaId);
 
         io.to(partidaId).emit("partidaAtualizada", partida);
@@ -179,6 +195,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           const jogadorIndex = partida.jogadores.findIndex((jogador: { id: string }) => jogador.id === socket.id);
           if (jogadorIndex !== -1) {
             partida.jogadores[jogadorIndex].conectado = false;
+            partida.reservas = partida.reservas.filter((id: string) => id !== socket.id);
+            io.to(partidaId).emit("partidaAtualizada", partida);
+            break;
+          }
+          const reservaIndex = partida.reservas.findIndex((id: string) => id === socket.id);
+          if (reservaIndex !== -1) {
+            partida.reservas.splice(reservaIndex, 1);
             io.to(partidaId).emit("partidaAtualizada", partida);
             break;
           }

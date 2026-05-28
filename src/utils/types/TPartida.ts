@@ -13,4 +13,5 @@ export type TPartida = {
   };
   status: { execucao: string, bloqueado: boolean };
   espectadores: { nome: string; }[];
+  reservas: string[];
 };

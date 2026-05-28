@@ -13,4 +13,5 @@ export default interface IPartida {
     };
     status: { execucao: string, bloqueado: boolean };
     espectadores: { nome: string }[];
+    reservas?: string[];
 }
